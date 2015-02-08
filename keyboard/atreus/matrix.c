@@ -141,71 +141,40 @@ uint8_t matrix_key_count(void)
  */
 static void  init_cols(void)
 {
-    // Input with pull-up(DDR:0, PORT:1)
-    DDRF  &= ~(1<<0 | 1<<1);
-    PORTF |=  (1<<0 | 1<<1);
-    DDRE  &= ~(1<<6);
-    PORTE |=  (1<<6);
-    DDRD  &= ~(1<<7 | 1<<6 | 1<<4);
-    PORTD |=  (1<<7 | 1<<6 | 1<<4);
-    DDRC  &= ~(1<<7 | 1<<6);
-    PORTC |=  (1<<7 | 1<<6);
-    DDRB  &= ~(1<<7 | 1<<6 | 1<< 5 | 1<<4 | 1<<3 | 1<<1 | 1<<0);
-    PORTB |=  (1<<7 | 1<<6 | 1<< 5 | 1<<4 | 1<<3 | 1<<1 | 1<<0);
+    DDRB = DDRC = DDRE = DDRF = 0; // columns
+    PORTB = PORTC = PORTE = PORTF = 255; // pullup resistors on inputs
+    DDRD = 15; // rows (1 2 4 8) high and columns (16 32 64 128) low
+    PORTD = 15;
 }
 
 static matrix_row_t read_cols(void)
 {
-    return (PINF&(1<<0) ? 0 : (1<<0)) |
-           (PINF&(1<<1) ? 0 : (1<<1)) |
-           (PINE&(1<<6) ? 0 : (1<<2)) |
-           (PINC&(1<<7) ? 0 : (1<<3)) |
-           (PINC&(1<<6) ? 0 : (1<<4)) |
-           (PINB&(1<<6) ? 0 : (1<<5)) |
-           (PIND&(1<<4) ? 0 : (1<<6)) |
-           (PINB&(1<<1) ? 0 : (1<<7)) |
-           ((PINB&(1<<0) && PINB&(1<<7)) ? 0 : (1<<8)) |     // Rev.A and B
-           (PINB&(1<<5) ? 0 : (1<<9)) |
-           (PINB&(1<<4) ? 0 : (1<<10)) |
-           (PIND&(1<<7) ? 0 : (1<<11)) |
-           (PIND&(1<<6) ? 0 : (1<<12)) |
-           (PINB&(1<<3) ? 0 : (1<<13));
+    return (PINF&(1<<6) ? 0 : (1<<0)) |
+           (PINF&(1<<5) ? 0 : (1<<1)) |
+           (PINF&(1<<4) ? 0 : (1<<2)) |
+           (PINB&(1<<7) ? 0 : (1<<3)) |
+           (PINB&(1<<6) ? 0 : (1<<4)) |
+           (PINB&(1<<5) ? 0 : (1<<5)) |
+           (PINB&(1<<4) ? 0 : (1<<6)) |
+           (PINB&(1<<3) ? 0 : (1<<7)) |
+           (PINB&(1<<2) ? 0 : (1<<8)) |
+           (PINB&(1<<1) ? 0 : (1<<9)) |
+           (PINB&(1<<0) ? 0 : (1<<10)) ;
 }
 
 /* Row pin configuration
- * row: 0   1   2   3   4
- * pin: D0  D1  D2  D3  D5
+ * row: 0   1   2   3
+ * pin: D0  D1  D2  D3
  */
 static void unselect_rows(void)
 {
     // Hi-Z(DDR:0, PORT:0) to unselect
-    DDRD  &= ~0b00101111;
-    PORTD &= ~0b00101111;
+    DDRD  &= ~0b00001111;
+    PORTD &= ~0b00001111;
 }
 
 static void select_row(uint8_t row)
 {
-    // Output low(DDR:1, PORT:0) to select
-    switch (row) {
-        case 0:
-            DDRD  |= (1<<0);
-            PORTD &= ~(1<<0);
-            break;
-        case 1:
-            DDRD  |= (1<<1);
-            PORTD &= ~(1<<1);
-            break;
-        case 2:
-            DDRD  |= (1<<2);
-            PORTD &= ~(1<<2);
-            break;
-        case 3:
-            DDRD  |= (1<<3);
-            PORTD &= ~(1<<3);
-            break;
-        case 4:
-            DDRD  |= (1<<5);
-            PORTD &= ~(1<<5);
-            break;
-    }
+    DDRD  |= (1<<row);
+    PORTD &= ~(1<<row);
 }

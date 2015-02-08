@@ -1,63 +1,51 @@
 #include "keymap_common.h"
 
-const uint8_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+#define SHIFT(key) ACTION_MODS_KEY(MOD_LSFT, key)
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* 0: qwerty */
-  KEYMAP(Q,   W,   E,   R,   T,  Y,    U,   I,   O,   P, \
-         A,   S,   D,   F,   G,  H,    J,   K,   L,   SCLN, \
-         Z,   X,   C,   V,   B,  LALT, N,   M,  COMM, DOT, SLSH, \
-         ESC, TAB, LGUI, LSFT, BSPC, LCTL, SPC, FN0, PGUP, PGDN, ENT),
-  /* 1: fn with software-dvorak-ized punctuation */
-  KEYMAP(1, 2, 3, 4, 5, 6, 7, 8, 9, 0, \
-         MINS, FN1, FN2, FN3, RBRC, LBRC, MINS, EQL, FN4, FN5, \
-         FN6, FN7, FN8, FN9, FN10, TRNS, FN11, FN12, FN13, FN15, FN14,  \
-         FN19, FN18, TRNS, TRNS, GRV, TRNS, TRNS, TRNS, FN16, FN17, BSLS ) \
+  KEYMAP(KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, \
+         KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCLN, \
+         KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, \
+         KC_FN3, KC_TAB, KC_LGUI, KC_LSFT, KC_BSPC, KC_LCTL, KC_LALT,     \
+         // KC_MINS and KC_LBRC are inverse-dvorakized
+         KC_SPC, KC_FN0, KC_QUOT, KC_LBRC, KC_ENT),                     \
+  /* 1: fn with undvorak-ized punctuation */
+  KEYMAP(SHIFT(KC_1), SHIFT(KC_2), SHIFT(KC_MINS), SHIFT(KC_EQUAL), SHIFT(KC_BSLS), \
+         KC_PGUP, KC_7, KC_8, KC_9, SHIFT(KC_8), \
+         SHIFT(KC_3), SHIFT(KC_4), SHIFT(KC_9), SHIFT(KC_0), KC_GRAVE, \
+         KC_PGDN, KC_4, KC_5, KC_6, SHIFT(KC_RBRC), \
+         SHIFT(KC_5), SHIFT(KC_6), KC_MINS, KC_EQUAL, SHIFT(KC_GRAVE), \
+         SHIFT(KC_7), KC_1, KC_2, KC_3, KC_BSLS,                       \
+         KC_FN1, KC_INS, KC_LGUI, KC_LSFT, KC_BSPC, KC_LCTL, KC_LALT, \
+         KC_SPC, KC_FN0, KC_E, KC_0, KC_RBRC), \
+  /* 2: arrows and function keys */
+  KEYMAP(KC_INS, KC_HOME, KC_UP, KC_END, KC_PGUP, KC_UP, KC_F7, KC_F8, KC_F9, KC_F10, \
+         KC_DEL, KC_LEFT, KC_DOWN, KC_RIGHT, KC_PGDN, KC_DOWN, KC_F4, KC_F5, KC_F6, KC_F11, \
+         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_F1, KC_F2, KC_F3, KC_F12, \
+         KC_NO, KC_NO, KC_LGUI, KC_LSFT, KC_BSPC, KC_LCTL, KC_LALT, KC_SPC, KC_FN2, KC_NO, KC_NO, KC_FN3)
 };
 
 enum function_id {
-  TEENSY_KEY,
+  BOOTLOADER,
+};
+
+const uint16_t PROGMEM fn_actions[] = {
+  [0] = ACTION_LAYER_MOMENTARY(1),  // to Fn overlay
+  [1] = ACTION_LAYER_ON(2, 1),  // switch to layer 2
+  [2] = ACTION_LAYER_OFF(2, 1),  // switch back to layer 0
+  [3] = ACTION_FUNCTION(BOOTLOADER) // reset
 };
 
 void action_function(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
   keyevent_t event = record->event;
 
-  if (id == TEENSY_KEY) {
+  if (id == BOOTLOADER) {
     clear_keyboard();
     print("\n\nJump to bootloader... ");
     _delay_ms(250);
-    bootloader_jump(); // should not return
+    bootloader_jump(); // doesn't actually work ATM
     print("not supported.\n");
   }
 }
-
-// looks like all normally-shifted keys need to be listed here
-const uint16_t PROGMEM fn_actions[] = {
-  [0] = ACTION_LAYER_MOMENTARY(1),  // to Fn overlay
-
-  // row 1
-  [1] = ACTION_MODS_KEY(MOD_LSFT, KC_EQL), // +
-  [2] = ACTION_MODS_KEY(MOD_LSFT, KC_9),
-  [3] = ACTION_MODS_KEY(MOD_LSFT, KC_0),
-  [4] = ACTION_MODS_KEY(MOD_LSFT, KC_LBRC), // {
-  [5] = ACTION_MODS_KEY(MOD_LSFT, KC_RBRC), // }
-
-  // row 2
-  [6] = ACTION_MODS_KEY(MOD_LSFT, KC_1),
-  [7] = ACTION_MODS_KEY(MOD_LSFT, KC_2),
-  [8] = ACTION_MODS_KEY(MOD_LSFT, KC_3),
-  [9] = ACTION_MODS_KEY(MOD_LSFT, KC_4),
-  [10] = ACTION_MODS_KEY(MOD_LSFT, KC_5),
-  [11] = ACTION_MODS_KEY(MOD_LSFT, KC_6),
-  [12] = ACTION_MODS_KEY(MOD_LSFT, KC_7),
-  [13] = ACTION_MODS_KEY(MOD_LSFT, KC_8),
-  [14] = ACTION_MODS_KEY(MOD_LSFT, KC_SLSH), // ?
-  [15] = ACTION_MODS_KEY(MOD_LSFT, KC_GRV), // ~
-
-  // row 3
-  [16] = ACTION_MODS_KEY(MOD_LSFT, KC_MINS), // _
-  [17] = ACTION_MODS_KEY(MOD_LSFT, KC_BSLS), // |
-  [18] = ACTION_MODS_KEY(MOD_LSFT, KC_INSERT), // for pasting
-
-  // other
-  [19] = ACTION_FUNCTION(TEENSY_KEY),
-};
