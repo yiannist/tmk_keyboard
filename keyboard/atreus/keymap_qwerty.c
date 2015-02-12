@@ -11,7 +11,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KEYMAP(SHIFT(KC_1), SHIFT(KC_2), SHIFT(KC_LBRC), SHIFT(KC_RBRC), SHIFT(KC_BSLS), \
          KC_PGUP, KC_7, KC_8, KC_9, SHIFT(KC_8), \
          SHIFT(KC_3), SHIFT(KC_4), SHIFT(KC_9), SHIFT(KC_0), KC_GRAVE, \
-         KC_PGDN, KC_4, KC_5, KC_6, SHIFT(KEY_EQUAL), \
+         KC_PGDN, KC_4, KC_5, KC_6, SHIFT(KC_EQUAL), \
          SHIFT(KC_5), SHIFT(KC_6), KC_LBRC, KC_RBRC, SHIFT(KC_GRAVE), \
          SHIFT(KC_7), KC_1, KC_2, KC_3, KC_BSLS,                       \
          KC_FN1, SHIFT(KC_INS), KC_LGUI, KC_LSFT, KC_BSPC, KC_LCTL, KC_LALT, \

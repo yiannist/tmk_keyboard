@@ -32,11 +32,9 @@ action_t keymap_fn_to_action(uint8_t keycode)
 // TODO: currently halts the operation but does not enter the bootloader.
 // See https://github.com/tmk/tmk_keyboard/issues/179
 void bootloader() {
-  if (id == BOOTLOADER) {
-    clear_keyboard();
-    print("\n\nJump to bootloader... ");
-    _delay_ms(250);
-    bootloader_jump(); // doesn't actually work ATM
-    print("not supported.\n");
-  }
+  clear_keyboard();
+  print("\n\nJump to bootloader... ");
+  _delay_ms(250);
+  bootloader_jump(); // doesn't actually work ATM
+  print("not supported.\n");
 }

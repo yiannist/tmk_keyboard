@@ -59,4 +59,6 @@ enum function_id {
   BOOTLOADER,
 };
 
+void bootloader();
+
 #endif
