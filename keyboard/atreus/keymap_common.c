@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /* translates key to keycode */
-uint8_t keymap_key_to_keycode(uint8_t layer, key_t key)
+uint16_t actionmap_key_to_action(uint8_t layer, key_t key)
 {
-    return pgm_read_byte(&keymaps[(layer)][(key.row)][(key.col)]);
+    return pgm_read_word(&keymaps[(layer)][(key.row)][(key.col)]);
 }
 
 /* translates Fn keycode to action */

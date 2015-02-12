@@ -29,6 +29,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include "debug.h"
 #include "keymap.h"
 
+#define SHIFT(key) ACTION(ACT_MODS, (MOD_LSFT << 8) | (key))
+#define CTRL(key) ACTION(ACT_MODS, (MOD_LCTL << 8) | (key))
+#define ALT(key) ACTION(ACT_MODS, (MOD_LALT << 8) | (key))
+#define GUI(key) ACTION(ACT_MODS, (MOD_LGUI << 8) | (key))
 
 extern const uint16_t keymaps[][MATRIX_ROWS][MATRIX_COLS];
 extern const uint16_t fn_actions[];
