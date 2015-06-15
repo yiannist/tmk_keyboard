@@ -140,10 +140,12 @@ uint8_t matrix_key_count(void)
  */
 static void  init_cols(void)
 {
-    DDRB = DDRC = DDRE = DDRF = 0; // columns
-    PORTB = PORTC = PORTE = PORTF = 255; // pullup resistors on inputs
+    DDRC = DDRE = DDRF = 0; // columns
+    PORTC = PORTE = PORTF = 0xff; // pullup resistors on inputs
     DDRD = 15; // rows (1 2 4 8) high and columns (16 32 64 128) low
     PORTD = 15;
+    PORTB = 0xfd; // mostly columns, but with one row
+    DDRB = 2;
 }
 
 static matrix_row_t read_cols(void)
@@ -194,7 +196,8 @@ static matrix_row_t read_cols(void)
  */
 static void unselect_rows(void)
 {
-    PORTD = 15;
+    PORTD = 0xf;
+    PORTB &= ~2;
 }
 
 #define ROW_COUNT 4
@@ -206,5 +209,12 @@ int rows[ROW_COUNT] = {0, 1, 3, 2};
 
 static void select_row(uint8_t row)
 {
-  PORTD = (char)(~(1 << rows[row]));
+  // row 0 is moved to PB1 since PD0 was damaged
+  if(row == 0) {
+    PORTD = 0xf;
+    PORTB &= 0xfd;
+  } else {
+    PORTB |= 2;
+    PORTD = (char)(~(1 << rows[row]));
+  }
 }
