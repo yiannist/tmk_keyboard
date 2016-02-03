@@ -3,6 +3,8 @@
 The [Atreus](https://atreus.technomancy.us) is a small mechanical
 column-staggered ergonomic keyboard, usually built from a kit.
 
+Please see the "atreus" branch, which is receiving updates.
+
 ## Layout
 
 Only a handful of punctuation marks (and no digits) are available
