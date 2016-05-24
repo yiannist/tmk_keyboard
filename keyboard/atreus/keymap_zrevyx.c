@@ -6,6 +6,11 @@
 
 /* Layout by /u/zrevyx */
 
+/* This layout has the numbers across the top in the fn layer for
+   people who prefer that to the numpad layout. It also has the arrows
+   shifted down a little and moves many L2 keys to the fn layer. But
+   most punctuation requires fn and shift together in order to make room. */
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* 0: mostly letters */
   KEYMAP(KC_QUOT, KC_COMM,  KC_DOT,  KC_P,     KC_Y,    KC_F,    KC_G,    KC_C,    KC_R,    KC_L, \
