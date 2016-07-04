@@ -152,6 +152,14 @@ Formerly you would have to specify `SWAPCOLUMNS` or `PCBFLIP` for
 boards that had the labeled side facing up, but this is now the
 default.
 
+### Mouse keys
+
+The included `keymap_mouse.c` layout shows how to add a layer with
+keys that control the mouse. Add a `MOUSEKEY_ENABLE=yes` argument to
+your `make` command when you compile when you select this layout, and
+you can use `fn+esc, z` to enter mouse mode. A tap of `fn` will take
+you back to layer 2.
+
 ## Teensy 2
 
 This codebase defaults to targeting the most recent PCB-based design
