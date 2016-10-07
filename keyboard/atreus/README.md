@@ -24,7 +24,7 @@ Download one of the [precompiled firmwares](https://atreus.technomancy.us/downlo
 
 If you have Homebrew:
 
-    $ brew tap larsimmisch/avr
+    $ brew tap osx-cross/avr
     $ brew install avrdude
 
 If you don't have Homebrew, use [Crosspack for AVR](https://www.obdev.at/products/crosspack/index.html).
