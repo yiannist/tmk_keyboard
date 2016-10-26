@@ -22,15 +22,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_FN4, KC__VOLUP, KC_NO, KC_NO, KC_FN3,                         KC_NO, KC_F1, KC_F2, KC_F3, KC_F12, \
          //                                                                       back layer
          KC_NO, KC__VOLDOWN, KC_LGUI, KC_LSFT, KC_BSPC, KC_LCTL, KC_LALT, KC_SPC, KC_FN2, KC_PSCREEN, KC_SLCK, KC_PAUSE), \
-  /* 3: mouse control, reached by fn+esc, then z, leave by pressing fn */
-  KEYMAP( /* 3: mouse */
-         //       acceleration settings                                   buttons: 4   left   middle   right    5
-         KC_NO,   KC_FN19, KC_FN20, KC_FN21, KC_NO,                       KC_FN17,   KC_FN14, KC_FN16, KC_FN15, KC_FN18, \
-         //              mouse wheel                                        movement: left    up/down  right
-         KC_NO,   KC_FN12, KC_FN10, KC_FN13, KC_NO,                       KC_NO,     KC_FN8,  KC_FN6,  KC_FN9, KC_NO,   \
-         KC_NO,   KC_NO,   KC_FN11, KC_NO,   KC_NO,                       KC_NO,     KC_NO,   KC_FN7,  KC_NO,   KC_NO,   \
-         //                                                                        back layer
-         KC_TRNS, KC_NO,   KC_TRNS, KC_TRNS, KC_NO,   KC_TRNS, KC_TRNS,   KC_NO,     KC_FN5,  KC_NO,   KC_NO,   KC_NO  \
+  /* 3: mouse control, reached by fn+esc, then holding z*/
+  KEYMAP(
+         //       left    up/down  right                              mouse wheel: left up/down right
+         KC_NO,   KC_NO,   KC_FN6,  KC_NO,   KC_NO,                   KC_NO,   KC_NO,   KC_FN10, KC_NO,   KC_NO,   \
+         KC_NO,   KC_FN8,  KC_FN7,  KC_FN9,  KC_NO,                   KC_NO,   KC_FN12, KC_FN11, KC_FN13, KC_NO,   \
+         //       acceleration settings                               buttons:    left   middle   right
+         KC_NO,   KC_FN19, KC_FN20, KC_FN21, KC_NO,                   KC_FN17,   KC_FN14, KC_FN16, KC_FN15, KC_FN18, \
+         KC_TRNS, KC_NO,   KC_TRNS, KC_TRNS, KC_NO, KC_TRNS, KC_TRNS, KC_NO,     KC_FN5,  KC_NO,   KC_NO,   KC_NO  \
           )
 };
 
@@ -39,8 +38,8 @@ const uint16_t PROGMEM fn_actions[] = {
   [1] = ACTION_LAYER_ON(2, 1),  // switch to layer 2
   [2] = ACTION_LAYER_OFF(2, 1),  // switch back to layer 0
   [3] = ACTION_FUNCTION(BOOTLOADER), // reset for uploading new code
-  [4] = ACTION_LAYER_ON(3, 1),  // switch to layer 2
-  [5] = ACTION_LAYER_OFF(3, 1),  // switch back to layer 0
+  [4] = ACTION_LAYER_ON(3, 1),  // switch to layer 3
+  [5] = ACTION_LAYER_OFF(3, 1),  // switch back to layer 2
 
   [6] = ACTION_MOUSEKEY(KC_MS_U), // mouse movement
   [7] = ACTION_MOUSEKEY(KC_MS_D),
