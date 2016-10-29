@@ -49,6 +49,7 @@ above. Reset the board and quickly run this command:
 
 It should emit a bunch of output followed by "avrdude done.  Thank you."
 
+You shouldn't have to run these commands as root.
 If the upload does not complete, check the permissions on the USB
 device and ensure it's writeable by your user. You may need to run
 `sudo make udev` on some Linux-based systems to install a udev rule if
