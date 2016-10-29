@@ -140,6 +140,7 @@ endif
 build: $(TARGET).hex
 
 upload: build
+	if [ -f $(USB) ] && [ ! -r $(USB) ]; then echo "Warning: no read permission!"; fi; \
 	while [ ! -r $(USB) ]; do sleep 1; done; \
 	avrdude -p $(MCU) -c avr109 -U flash:w:$(TARGET).hex -P $(USB)
 
