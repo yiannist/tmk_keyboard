@@ -20,12 +20,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 /* USB Device descriptor parameter */
-#define VENDOR_ID       0x16C0
-#define PRODUCT_ID      0x047C
+#define VENDOR_ID       0x1209
+#define PRODUCT_ID      0xA1E5
 #define DEVICE_VER      36
 #define MANUFACTURER    technomancy
 #define PRODUCT         Atreus
-#define DESCRIPTION     TMK keyboard firmware for Atreus
+#define DESCRIPTION     Atreus mechanical travel keyboard
 
 /* key matrix size */
 #define MATRIX_ROWS 4
