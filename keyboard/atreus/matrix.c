@@ -136,7 +136,7 @@ uint8_t matrix_key_count(void)
 
 /* Column pin configuration
  * col: 0   1   2   3   4   5   6   7   8   9   10
- * pin: B7  D6  F7  F6  B6  D4  E6  B4  B5  C6  D7
+ * pin: B7  D6  B1  F6  B6  D4  E6  B4  B5  C6  D7
  */
 static void  init_cols(void)
 {
@@ -163,7 +163,7 @@ static matrix_row_t read_cols(void)
 #else
     return (PINB&(1<<7) ? 0 : (1<<10)) |
            (PIND&(1<<6) ? 0 : (1<<9)) |
-           (PINF&(1<<7) ? 0 : (1<<8)) |
+           (PINB&(1<<1) ? 0 : (1<<8)) |
            (PINF&(1<<6) ? 0 : (1<<7)) |
            (PINB&(1<<6) ? 0 : (1<<6)) |
            (PIND&(1<<4) ? 0 : (1<<5)) |
