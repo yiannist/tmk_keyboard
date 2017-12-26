@@ -108,8 +108,8 @@ full AVR compiler suite.
 
 ### Mac OS X
 
-    $ brew install avr-libc
-    
+    $ brew install avr-gcc
+
 If you already installed Crosspack above you should be fine.
 
 ### Windows
@@ -187,4 +187,3 @@ may be interested in that instead.
 There is also the [Menelaus](https://github.com/technomancy/menelaus)
 firmware, which is written in MicroScheme. Note that this is still not
 very polished and intended more for educational purposes than anything else.
-
