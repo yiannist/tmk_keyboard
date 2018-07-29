@@ -3,6 +3,11 @@
 The [Atreus](https://atreus.technomancy.us) is a small mechanical
 column-staggered ergonomic keyboard, usually built from a kit.
 
+*Notice*: while this codebase works fine with the Atreus keyboard, the
+current recommended method is to use [QMK](https://qmk.fm) instead as
+the [web configurator](https://atreus.technomancy.us/qmk) is
+easier to use and the documentation is much better.
+
 This repository contains firmware (called TMK) loaded into its
 controller to make the keyboard function. You can also use it to
 customize its layout or behavior.
